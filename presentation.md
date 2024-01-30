@@ -27,9 +27,9 @@ Introduce rust and purpose of talk
 # Who am I?
 
 - **Alec Di Vito** 
-- **Job**: Senior Cloud Developer
-- **Experince in:** Python, Go, Javascript, Java and Jenkinfiles
-- **Uses Rust:** In free time
+- **Job**: ~~Senior~~ Staff Cloud Developer
+- **Experience in:** Python, Go, Javascript, Java and Jenkinfiles
+- **Uses Rust:** Only in free time sadly 😭
 
 Get in Touch
 
@@ -38,13 +38,18 @@ Get in Touch
 
 ---
 
-# Why should I listen to you?
+## Goal for today
 
-Good question
 
-Often when I ask others about adopting Rust, they are strongly against it.
+#### Get you From
 
-However i believe it can help the bank run more software faster. 
+> I already know python and it's fast enough
+> `Current RBC Dev`
+
+#### To
+
+> I wish my code was "blazing fast" and I'll use Rust to get there
+> `Future RBC Dev`
 
 ---
 
@@ -57,21 +62,481 @@ However i believe it can help the bank run more software faster.
 
 ## What we won't be doing
 
-- Learning Rust
+- Learning programming in Rust
 
 ---
 
-# Python vs Rust
+## Why Rust
+
+- Powerful type system
+- Algebraic data types (Data types that can be added together to create strict)
+- Safe concurrency
+- Good support for meta-programming
+- Strong package management system
+- Built-in testing, document generation and benchmarking
+- Good `async`/`await` support
+- Portable between different compilation targets
+
+<!--
+Modern Language (nice to use)
+- Nice Generics
+- Algebraic data types + patterns
+- Modern tooling
+
+
+-->
 
 ---
 
-# Java vs Rust
+## Powerful type system
+
+```rust
+fn show<D: std::fmt::Display>(d: D) {
+    println!("{}", d)
+}
+
+fn main() {
+    show("Example")
+    show(32)
+}
+```
+
+```bash
+> cargo run
+Example
+32
+```
 
 ---
 
-# Go vs Rust
+## Powerful type system
+
+```rust
+struct Example {
+    message: String
+}
+
+fn show<D: std::fmt::Display>(d: D) {
+    println!("{}", d)
+}
+
+fn main() {
+    show(Example { message: String::from("hello world")})
+}
+```
 
 ---
+
+## Powerful type system
+```zsh
+➜  example git:(main) ✗ cargo build
+   Compiling example v0.1.0 (/Users/divitoa/code/alecdivito/Rust-Presentation/example)
+error[E0277]: `Example<'_>` doesn't implement `std::fmt::Display`
+  --> src/main.rs:10:10
+   |
+10 |       show(Example {
+   |  _____----_^
+   | |     |
+   | |     required by a bound introduced by this call
+11 | |         message: "hello world",
+12 | |     })
+   | |_____^ `Example<'_>` cannot be formatted with the default formatter
+   |
+   = help: the trait `std::fmt::Display` is not implemented for `Example<'_>`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+note: required by a bound in `show`
+  --> src/main.rs:5:12
+   |
+5  | fn show<D: std::fmt::Display>(d: D) {
+   |            ^^^^^^^^^^^^^^^^^ required by this bound in `show`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `example` (bin "example") due to previous error
+```
+
+---
+
+## Powerful type system
+
+```rust
+trait Find<P, T>
+where
+    P: Fn(&T) -> bool,
+{
+    fn new_find_func(&self, predicate: P) -> Option<&T>;
+}
+
+impl<P, T> Find<P, T> for Vec<T>
+where
+    P: Fn(&T) -> bool,
+{
+    fn new_find_func(&self, predicate: P) -> Option<&T> {
+        self.iter().filter(|p| predicate(*p)).take(1).next()
+    }
+}
+```
+
+---
+
+## Powerful type system
+
+```rust
+fn main() {
+    let list = vec![1, 2, 3, 4, 5];
+    println!("{:?}", list.new_find_func(|i| *i > 3));
+    println!("{:?}", list.new_find_func(|i| *i == 10));
+}
+```
+
+```zsh
+➜  example git:(main) ✗ cargo run
+   Compiling example v0.1.0 (/Users/divitoa/code/alecdivito/Rust-Presentation/example)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/debug/example`
+Some(4)
+None
+```
+
+---
+
+## Algebraic data types
+
+- Types that can be added together
+- Can be matched on
+
+```rust
+enum Option<T> {
+    Some(T),
+    None
+}
+
+enum Result<T, E> {
+    Ok(T),
+    Err(E)
+}
+```
+
+---
+
+## Algebraic data types
+
+```rust
+struct Version {
+    major: Option<i32>,
+    minor: Option<i32>,
+    patch: Option<i32>,
+}
+
+impl Display for Version {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match (self.major, self.minor, self.patch) {
+            (Some(major), Some(minor), Some(patch)) => write!(f, "{}.{}.{}", major, minor, patch),
+            (Some(major), Some(minor), None) => write!(f, "{}.{}", major, minor),
+            (Some(major), None, None) => write!(f, "{}", major),
+            (None, _, _) | (Some(_), None, _) => unreachable!(),
+        }
+    }
+}
+```
+
+---
+
+## Error Handling
+
+- panic
+- Option & unwrap
+- Result
+- Error Types
+
+---
+
+## Life Times
+
+- This is a part of the borrow checker
+- Means that we can read the value
+
+---
+
+## Mutability
+
+- Don't allow the same value to be used twice
+- The following fails to compile
+
+```rust
+fn main() {
+    let a = vec![10];
+    let b = a;
+    println!("{}", a);
+}
+```
+
+```zsh
+➜  example git:(main) ✗ cargo run
+   Compiling example v0.1.0 (/Users/divitoa/code/alecdivito/Rust-Presentation/example)
+warning: unused variable: `b`
+ --> src/main.rs:6:9
+  |
+6 |     let b = a;
+  |         ^ help: if this is intentional, prefix it with an underscore: `_b`
+  |
+  = note: `#[warn(unused_variables)]` on by default
+
+error[E0382]: borrow of moved value: `a`
+ --> src/main.rs:7:22
+  |
+5 |     let a = vec![10];
+  |         - move occurs because `a` has type `Vec<i32>`, which does not implement the `Copy` trait
+6 |     let b = a;
+  |             - value moved here
+7 |     println!("{:?}", a);
+  |                      ^ value borrowed here after move
+  |
+  = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+  |
+6 |     let b = a.clone();
+  |              ++++++++
+```
+
+---
+
+## Mutable Lifetimes
+
+- function with mutable lifetime
+- everything must be declared mutable
+- immunitable by default
+
+---
+
+## Pointers
+
+- Box
+- Rc
+- Arc
+
+---
+
+## Thread Safety
+
+```rust
+    let a = Rc::new(10);
+    let b = a;
+
+    std::thread::spawn(move || {
+        println!("{}", b);
+    });
+```
+
+```
+➜  example git:(main) ✗ cargo run
+   Compiling example v0.1.0 (/Users/divitoa/code/alecdivito/Rust-Presentation/example)
+error[E0277]: `Rc<i32>` cannot be sent between threads safely
+   --> src/main.rs:10:24
+    |
+10  |       std::thread::spawn(move || {
+    |       ------------------ ^------
+    |       |                  |
+    |  _____|__________________within this `[closure@src/main.rs:10:24: 10:31]`
+    | |     |
+    | |     required by a bound introduced by this call
+11  | |         println!("{}", b);
+12  | |     });
+    | |_____^ `Rc<i32>` cannot be sent between threads safely
+```
+
+---
+
+## Thread safety
+
+- Using `Arc` is safe
+- Using `Rc` in multiple threaded code is unsafe
+
+```rust
+    let a = Arc::new(10);
+    let b = a;
+
+    std::thread::spawn(move || {
+        println!("{}", b);
+    });
+```
+
+- This is enforced by the compiler
+
+---
+
+## Unsafe Operations
+
+- Unsafe operations
+
+---
+
+## Testing
+
+- unit testing
+- integeration testing
+- Documentation testing
+
+---
+
+## Documentation Generation
+
+- Generated sites
+- Documentation
+- Hosted for free
+
+---
+
+## Macros
+
+- Quickly write out repeatable code
+- Rust like syntax
+
+---
+
+## Procedural Macros
+
+- Harder to write but can create more complicated code
+- Able to iterate over a stream of tokens and have complicated logic
+
+---
+
+## Cargo
+
+- Build tool for Rust
+- Package manager
+
+---
+
+## Cargo.toml
+
+- Manifest file for Rust
+- Track package and project settings
+- Track dependancy and verions
+  - Download from git and cargo.io
+
+---
+
+## Build targets
+
+- Quickly and easily target different compilers and architectures
+- Easy compile to wasm
+- Tools that generate bindings automatically for 
+  - Web Assembly and Javascript
+  - C/C++ Header files
+  - Python
+
+---
+
+## Build Scripts
+
+- For building more complicated projects
+
+---
+
+## Async / Await support
+
+- Multiple runtimes to choose from
+- Zero-cost abstractions state machines
+
+---
+
+## Overall result
+
+reduced tail latency because no more GC calls
+
+---
+
+# Rust is better then Python because
+
+- Its much faster
+- And much more memory efficient
+- Pattern matching
+- Strict Static Typing
+
+<!--
+Some i didn't cover
+- Algebraic data types
+- Many fewer runtime
+-->
+
+> The amount of memory [pandas] needs to finish an operation ... 10 times the RAM size or 10 times data set size, and for polar this has been lower.
+
+<!--
+
+no interpreter
+no runtime
+easier to do multi threading
+pattern matching, using types as a strength
+running for a while then checking
+
+GIL - Global Interpreture lock
+ - locks variable value in a thread at a time
+
+-->
+
+---
+
+# Rust is better then Java because
+
+- No GVM overhead or pauses
+- Lower memory use
+- Safer concurrency <!-- data races -->
+- Pattern matching
+- Power type system
+- Single build system
+
+<!-- 
+- No JVM overhead or GC pauses
+- Much lower memory use
+- No byte code
+- Zero cost abstractions
+  - Often times java includes metadata on the object of interfaces that are
+    attached to the object at runtime. These abstractions add bloat to your code
+  - This doesn't happen in rust because all of the abstractions like interfaces
+    are compiled away into the binary
+- Data Races (Safer concurrency)
+  - Rust at compile time can validate that there are no data races and so these
+  - concerns can go away
+- Unified build system means there is only one
+-->
+
+---
+
+# Rust is better then C/C++ because
+
+- it won't Segfaults
+- it can't use after free
+- no null pointers
+- more powerful type system
+- has no complicated build steps
+- package management system
+- builds a static binary
+
+---
+
+# Rust is better the Jenkinfiles
+
+- Powerful type system
+- Ability to run on a local machine
+- Better package management
+
+---
+
+# Rust is better then Go because
+
+- No GC pauses
+- lower memory use
+- No `nil` pointers
+- No fine grain error checking (nicer error checking)
+- Concurrency bugs are easy to run into
+- Easy to put stuff on the heap
+- more powerful type system
+- Zero-cost abstractions
+
+
+---
+
+
 
 # Why I love Rust
 
@@ -314,6 +779,7 @@ To get more involved, I would recommend subscribing to this week in rust.
 
 - [Considering Rust](https://www.youtube.com/watch?v=DnT-LUQgc7s) By Jon Gjengset
 - [Unlocking Rust's power through mentorship and knowledge spreading, with Tim McNamara](https://open.spotify.com/episode/32rkz55Jm4MRsO1AEmH9UT?si=b1e1791c40ff47be)
+- [Tom Hank - Why Rust is a significant developer in dont include this](https://www.youtube.com/watch?v=IwjlCxwcuIc)
 
 ---
 
