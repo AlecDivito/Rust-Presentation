@@ -1,18 +1,39 @@
-use std::{rc::Rc, sync::Arc};
+use std::sync::Arc;
+
+use clap::Parser;
 
 mod algebraic_data_types;
 mod power_type_system;
+mod race_condition;
+mod test_in_comment;
 
 struct Slice<'a> {
-    slice: &'a mut [u8],
+    _slice: &'a mut [u8],
 }
 
-// fn loop_slice<'a>(slice: &mut test)
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// Name of the person to greet
+    #[arg(short, long)]
+    name: String,
+
+    /// Number of times to greet
+    #[arg(short, long, default_value_t = 1)]
+    count: u8,
+}
 
 fn main() {
+    let args = Args::parse();
+
+    for _ in 0..args.count {
+        println!("Hello {}!", args.name)
+    }
+
     let mut list = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let slice = Slice {
-        slice: &mut list[0..5],
+    let _slice = Slice {
+        _slice: &mut list[0..5],
     };
 
     let a = Arc::new(10);
@@ -24,4 +45,5 @@ fn main() {
 
     crate::power_type_system::main();
     crate::algebraic_data_types::main();
+    crate::race_condition::main();
 }
