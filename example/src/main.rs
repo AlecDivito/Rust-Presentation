@@ -1,4 +1,7 @@
-use std::sync::Arc;
+use std::{
+    sync::{Arc, Mutex},
+    thread::{self, JoinHandle, Thread},
+};
 
 use clap::Parser;
 
@@ -22,6 +25,10 @@ struct Args {
     /// Number of times to greet
     #[arg(short, long, default_value_t = 1)]
     count: u8,
+}
+
+fn print_to_console<D: std::fmt::Display>(d: D) {
+    println!("{}", d);
 }
 
 fn main() {
