@@ -10,7 +10,7 @@ transition: fade
 
 # Learning to love the Rust Propaganda
 
-Understand why Rust is the most loved and admired language today
+Understand why Rust is the most loved and admired programming language
 
 Alec Di Vito
 
@@ -22,7 +22,7 @@ February 2024
 
 # Who am I?
 
-- **Alec Di Vito**
+- **Alec Di Vito** `@alecdivito`
 - **Job**: ~~Senior~~ Staff Cloud Developer
 - **Role**: Helping enable Terraform at RBC
 - **Experience in:** Python, Go, Javascript, Java and Jenkinfiles
@@ -30,8 +30,8 @@ February 2024
 
 Get in Touch
 
-- Slack
-- Email
+- Linkedin
+- RBC Slack and Email
 
 ![bg right:40% vertical](./assets/alec_1.jpg)
 
@@ -41,35 +41,39 @@ Get in Touch
 
 - What is Rust and who's adopted it
 - Brief History of Rust
-- Rust features
-- Rust tools and ecosystem
+- 3 Rust features you wish your language had
+- Rust community
 
 ## What we won't be doing 🙅
 
-- Learning how to program in Rust 
+- Learning how to program in Rust
+
+<!--
+In this presentation I will cover what rust is, who in the industry is using it and how rust started.
+In the second half, I'll cover some of rusts features and it's community.
+-->
 
 ---
 
 ## What is this Rust?
 
 - Rust is a **general purpose programming language**
-  - Systems programming
-  - Embedded systems
-  - Application programming
-- Rust's features
-  - Performance
-  - Type Safety
-  - Memory Safety
-  - Fearless Concurrency
+  - Computer Systems
+  - Embedded Systems
+  - Applications
 
 ![bg right:33% w:90% vertical](./assets/rust_mascot.svg)
 ![bg w:90%](./assets/rust_logo.svg)
+
+<!--
+
+-->
 
 ---
 
 ## Systems programming
 
-Foundational software that interacts directly with hardware and manages resources.
+Foundational software that interacts directly with hardware and manages underly resources.
 
 - Operating Systems
 - Development tools
@@ -77,8 +81,16 @@ Foundational software that interacts directly with hardware and manages resource
 - Databases
 
 ![bg fit right:50%  horizontal](./assets/linux.png)
-![bg fit ](./assets/tcp_ip.png)
+![bg fit](./assets/tcp_ip.png)
 ![bg fit](./assets/postgres.png)
+
+<!--
+One use of Rust is to develop systems that interact directly with underly hardware.
+These are foundationaly systems that someone would program their application on
+top of.
+
+Examples of systems programming could be operating systems, development tools and databases.
+-->
 
 ---
 
@@ -88,27 +100,42 @@ Everyday devices that run software to do a physical function.
 
 - Drones
 - Medical Devices
-- Appliances
+- Space ships
 - Wearable Technology
 
 ![bg fit right:50% vertical](./assets/drone.png)
-![bg fit](./assets/apple_watch.png)
 ![bg fit](./assets/pacemaker.png)
+
+<!--
+Some technology needs to work in mission critical scenarios where accessing them
+is not an option. Rust memory safety features makes it a great choice for programming
+embedded systems where it's not guaranteed the device will have an underlying operating system.
+
+Examples of devices that maybe built with Rust are drones, medical devices and space ships
+-->
 
 ---
 
 ## Application Programming
 
-Software the implements some type of user, business or automation requirement through coded functions.
+software applications to accomplish specific tasks or solve problems for users.
 
 - Web Servers
 - Web Browsers
-- IPhone Apps
-- Banks 👀
+- Game engines
+- **Banks** 👀
 
 ![bg fit right:50% vertical](./assets/nginx.png)
 ![bg fit](./assets/rbc.png)
-![bg fit](./assets/chrome.png)
+![bg fit](image.png)
+
+<!--
+Rust is also a good fit for developer building applications, such as Game engines,
+Web browsers and servers, and dare i say banks.
+
+It's strong type system means you can encode a lot of business rules straight into
+the language.
+-->
 
 ---
 
@@ -125,20 +152,37 @@ Software the implements some type of user, business or automation requirement th
 > It's 2023 and Rust is the most admired programming language for 8 years in a row
 > ‐ [2023 Stackoverflow Survey](https://survey.stackoverflow.co/2023/#section-admired-and-desired-programming-scripting-and-markup-languages)
 
+<!--
+Because Rust is so versional, it's used all over our industry. Tech giants like
+Google, Microsoft and amazon have spent millions of dollars and time developing systems
+that use Rust. They've also donated and contributed millions of dollars to
+build support for Rust inside of their company or donated it to the Rust organization
+so that it can continue to exist.
+
+Companies like Cloudflare, Figma, Meta, RBC and many more have been using Rust
+as well for some of their systems.
+
+None of this is surprising because Rust has been the most admired language for
+the past 8 years as reported by the 2023 stack overflow survey!
+-->
+
 ---
 
-# The story behind the project
+# The story behind the Rust
+
+<!--
+With the amount of support Rust is getting, I think it's interesting to share the
+story of why Rust was created.
+-->
 
 ---
 
 ![](./assets/elevator.png)
 
 <!--
-
-- Started as a personal project in 2006 by Graydon Hoare
-- He was a 29 year old developer working at **Mozilla**
-- The elevator wasn't working again after work; Software had crashed
-- While walking up **21 floors** he thought about how software developers couldn't make an elevator work without crashing
+- It all started in 2006 when Graydon, a developer at mozilla, was coming home after a hard days work
+- When he entered hist apartment building, he noticed that again, the elevator was out of service
+- While walking up **21 floors** all he could think about was how software developers couldn't make an elevator work without crashing
 - Rust was born, **"over-engineered for survival"**
 
 -->
@@ -147,15 +191,16 @@ Software the implements some type of user, business or automation requirement th
 
 ## History of Rust
 
-- **Mozilla research** sponsored the project in 2009 for development of **servo web browser engine**
-- Over the years Rust changed a lot
+- **Mozilla research** sponsored the project in 2009 for development of the **servo web browser engine**
 - In 2015 it had it's 1.0 release
+- Over the years Rust changed a lot
 
 ![bg fit right:50%](./assets/star-history-rust.png)
 
 <!--
 
-- Growing adoption
+- After 3 years of development, the promises of the language made mozilla interested if they could build a better browser in Rust so the server project was born
+- Rust changed a lot during this time and finally became more stable in 2015, when it had it's 1.0 release
 
 -->
 
@@ -165,28 +210,41 @@ Software the implements some type of user, business or automation requirement th
 
 - New multithreaded web browser architecture
 - Ability to safely spread work across multiple threads
-- Eliminate vulnerabilities in managing memory and data race
+- Eliminate vulnerabilities in managing memory and data races
 
 > 🔔 **info**
-> Microsoft estimates that 70% of the vulnerabilities in its code are due to memory errors from code written in these languages.
+> Microsoft estimates that 70% of the vulnerabilities in its code are due to memory errors from code written in languages like C/C++.
 
 <!-- 
-
-Our goal is to create an architecture that takes advantage of parallelism at
-many levels while eliminating common sources of bugs and security vulnerabilities
-associated with incorrect memory management and data races.
-
-- By spending more time up front, you could just skip programming memory bugs
-- Browsers are often an attack vector for hackers
-- What if the program we used could protect us from most attacks?
-
-- Main goal was to develop a safer browser engine
-
+- The reason why Mozzila was interested in using Rust is because programming a multithreaded browser is hard.
+- It's really easy to introduce memory safety issue when programming a large project in C/C++, as reported by microsoft which report that up to 70% of all vulnerabilities are memory related.
+- By using Rust, Mozzila could easily make Rust safely multi-threaded and create a better web browser
 -->
 
 ---
 
 # Introducing Rust
+
+<!--
+Now it time to start digging into Rust
+-->
+
+---
+
+## Rust Mascot
+
+Rust has a _unofficial_ mascot named **Ferris** 🦀
+
+![w:300px](image-6.png)
+
+![bg right 50% vertical](image-3.png)
+![bg right 50%](image-4.png)
+![bg right 50%](image-5.png)
+
+<!-- 
+And i first want to focus on the unofficial mascot of the rust programming language, Ferris.
+Any good programming language has a mascot, and this is rusts.
+-->
 
 ---
 
@@ -195,12 +253,20 @@ associated with incorrect memory management and data races.
 - **OCaml** for algebraic data types and pattern matching
 - **C++** for references, smart pointers, move semantics, and more
 - **Swift** for optional bindings
-- **Scheme** for hygienic macros
 - **Erlang** for message passing, thread failure
+- **Scheme** for hygienic macros
 - [And More](https://doc.rust-lang.org/reference/influences.html)
 
+![bg fit right:40% vertical](image-8.png)
+![bg fit right:40%](image-9.png)
+![bg fit right:40%](image-10.png)
+![bg fit right](image-11.png)
+
 <!--
-Rust is not an original language, instead it's borrowed design elements from a wide variety of languages.
+Rust also isn't necessarily a unique language. It borrows lots of different parts
+from different programming languages such as algebraic data types and pattern matching
+from OCaml and references, smart pointers and move semantic from C++. It also borrows
+features from swift, erlang, scheme and many more
 -->
 
 ---
@@ -230,43 +296,13 @@ Every language has reserved keywords that the language uses. These are some in w
 
 ---
 
-## Benefits of strong typing
-
-- Reduced runtime errors
-- Improved developer productivity
-- Code clarity and understanding
-- Built-in mitigation to vulnerability security
-
-<!--
-
-Rust can catch multiple of errors before compile time
-
-Reduced runtime errors: Emphasize how strong typing in Rust catches many type mismatches at compile time, preventing runtime crashes and unexpected behavior. Present examples of potential bugs that could arise in loosely typed languages due to incorrect type usage.
-Improved developer productivity: Highlight how strong typing helps developers write more reliable and maintainable code by enforcing type safety. Mention features like autocompletion and type checking that aid in catching errors early in the development process.
-Code clarity and understanding: Explain how explicit type declarations in Rust contribute to self-documenting code, making it easier for other developers to understand and modify the codebase. Use code snippets to illustrate the difference in clarity between strong and loose typing.
-Security benefits: Point out how strong typing can help mitigate certain security vulnerabilities, such as buffer overflows and memory leaks, which are more common in loosely typed languages. Briefly discuss Rust's memory management features.
-
-- Rust main feature
-- Types are like small tests all over your program
-- Protect your team by requiring you to think of all possible errors during development
-- Explicit typing to make variables `mut`able and `pub`lic
-
-1. Can't convert variables between types easily
-2. Strict validation that a type implements a behavior (interface) at compile time
-
--->
-
----
-
 ## A strong type system makes issues seen in languages like javascript impossible
 
-For example take the following Javascript example
+For example take the following Javascript example will run
 
 ```javascript
 assert(1 + "2" == 12)
 ```
-
-<br />
 
 In Rust, the string type needs to be converted to a number before doing the addition. A Rust developer may program the same test like so.
 
@@ -276,24 +312,70 @@ assert_eq!(1 + "2".parse::<u32>().unwrap(), 3)
 
 ---
 
-## Strong Types enforce error handling practices
+## It can also require we check if something exists
 
-But **what if** a non-number string is parsed and we `unwrap`?
+For example take the following Python example
 
-```rust
-assert_eq!(1 + "Ruh Roh 🐶".parse::<u32>().unwrap(), 3)
+```python
+dictionary = {}
+variable = dictionary["does_it_exist?"]
+do_foo(variable)
 ```
 
-<br />
-
-Instead of `unwrap`, use `match` to handle all cases of the `Result` enum!
+We grab a value from a dictionary, but we can **choose** to check it. Thats not the case in rust.
 
 ```rust
-match "2".parse::<u32>() {
-    Ok(num) => assert_eq!(1 + num, 3),
-    Err(err) => { ... } // handle the error
+let dictionary = HashMap::new()
+if let Some(value) = dictionary.get("does_it_exist?") {
+    do_foo(value)
 }
 ```
+
+---
+
+## And it will always guarantee memory points at something
+
+For example take the following Go example
+
+```go
+var pointer *int
+number := *pointer // 🚨 Segfault here
+fmt.Println(number)
+```
+
+**This is impossible in Rust!** There is no example because it's impossible!
+
+---
+
+## Benefits of strong typing
+
+- Reduced runtime errors
+- Improved developer productivity
+- Code is _correct_
+- Built-in mitigation to memory vulnerabilities
+
+![bg contain right:50%](image-14.png)
+
+<!--
+
+Therefore, strong typing is a benefit because it moves the error checking from
+runtime, to compile time. There is no longer a need to test your program at runtime
+because the type system will prove your program works!
+
+Rust strong type system is forcing you to put many small unit tests all a program.
+This forces programmers to define their assumptions into their program.
+
+Compare this to dynamic language's where it's expected for you to write assumptions
+as unit tests. However I'm sure everyone knows, that doesn't always happen.
+
+Strong typing makes writing correct code, which is code that does what you expect easier.
+By spending more time up front coding, you'll no longer need to spend more time
+debugging your code at runtime.
+
+Finally, because of all of these requirements implemented by the type system,
+a lot of memory class issues and vulnerabilities don't need to be planned for
+because the system protects you from doing the wrong thing.
+-->
 
 ---
 
@@ -311,7 +393,8 @@ Rust answer to how to keep memory in your application safe. It's made up of 3 co
 
 ### If a program can't pass the borrow checker, it doesn't compile
 
-![bg fit right:35%](image-16.png)
+![bg fit right:50%](./image-16.png)
+<!-- ![bg right:40%](image-13.png) -->
 
 ---
 
@@ -335,7 +418,7 @@ fn main() {
 
 ## Borrowing
 
-Borrows in rust can happen multiple times to create multiple readers of data.
+Borrows in rust can happen multiple times to create multiple readers of existing data.
 
 ```rust
   let data = 5;
@@ -351,7 +434,7 @@ Borrows in rust can happen multiple times to create multiple readers of data.
 
 ## Mutable borrowing
 
-But only one reference is allowed to be `mut`able.
+But what if you wanted multiple `mut`able borrows?
 
 ```rust
   let mut data = 5;
@@ -362,7 +445,9 @@ But only one reference is allowed to be `mut`able.
   println!("second borrow: {}", second_borrow);
 ```
 
-> But only if the variable is read-only
+It won't work and the program won't compile!
+
+> Can only have 1 writer of data at a time
 
 ---
 
@@ -371,18 +456,15 @@ But only one reference is allowed to be `mut`able.
 Validate that references are only borrowed for as long as they live.
 
 ```rust
-struct StringSlice<'a>(&'a str); // Must be explicit that we borrow a string for 'a
-
-fn print_slice<'a>(slice: StringSlice<'a>) { // lifetimes are generic
-    println!("{}", slice.0);
-}
+// Must be explicit that we borrow a string for the lifetime of 'a
+struct StringSlice<'a>(&'a str);
 
 let message = "Hello, world";
 let slice = StringSlice(&message[7..]); // Borrow the slice
-print_slice(slice)
+println!("{}", slice.0);                // print "world"
 ```
 
-> Borrow's without context require a lifetime to be explicit.
+> **Borrow's without context** require the lifetime to be explicit.
 
 ---
 
@@ -392,7 +474,23 @@ print_slice(slice)
 - Quicker feedback loop when errors are in your program
 - Clear ownership of variables
 
-![](image-17.png)
+![bg right:50%](image-17.png)
+
+<!--
+
+Using ownership, borrowing, and lifetime features, Rust is able to enforce that
+at all time in a Rust program, there is only ever 1 writer and multiple
+readers of variables.
+
+This provides safety from data races every showing up in your program. It also
+guards common errors from occurring such as use after free. This is where memory
+has been released by the operating system but a reference to that memory
+location still exists in the running program.
+
+The borrow checker and strict typing system work together to show clear ownership
+of a variable. With Rust, it's easy to determine if you are altering a
+reference or the variable.
+-->
 
 ---
 
@@ -404,24 +502,11 @@ print_slice(slice)
 
 **This is technically my first favorite feature!** But it depends on the strong type system and borrow checker exist!
 
-### Benefits
-
-- Multithread safely
-- Fearlessly increase performance of application
-- Sleep easy at night because you didn't write it in python
+![bg right:40%](image-7.png)
 
 <!--
-Highlight the Benefits for Programmers:
-
-Focus on Safety:
-Emphasize how fear of concurrency-related bugs disappears with Rust's built-in guarantees.
-Mention reduced debugging time and stress from knowing your code is thread-safe by default.
-Reduce Boilerplate:
-Show how Rust avoids complex locking code and thread management, leading to concise and readable concurrency constructs.
-Compare the simpler syntax of channels and message passing to manual primitives in other languages.
-Increased Performance:
-Briefly mention the potential performance advantages of zero-cost abstractions and efficient memory management in Rust's concurrency system.
-Explain how avoiding unnecessary locking and data copying can contribute to faster applications.
+- First favorite feature!
+- Depends on type system and borrow checker
 -->
 
 ---
@@ -488,7 +573,7 @@ println!("{}", num);
 
 ## Fearless concurrency in action **for real this time**
 
-Let's try this again but this time we'll use an `Arc`.
+Let's try this again but this time we'll use an `Arc` and `Mutex`.
 
 ```rust
 let mut list = Vec::new();
@@ -499,6 +584,9 @@ for _ in 0..10 {
 let _ = list.into_iter().map(JoinHandle::join);
 println!("{}", *counter.lock().unwrap());
 ```
+
+> 🔔 `Arc` is a reference counted pointer that can be shared across threads
+> 🔔 `Mutex` is a gatekeeper to insure shared data is only accessed one at a time
 
 ---
 
@@ -538,6 +626,28 @@ for _ in 0..10 {
 let _ = list.into_iter().map(JoinHandle::join);
 println!("{}", *counter.lock().unwrap());
 ```
+
+---
+
+## Benefits
+
+- Multithread safely
+- Fearlessly increase performance of application
+- Sleep easy at night because you didn't write it in python
+
+![bg fit right:50%](./image-13.png)
+
+<!--
+
+By relying on the borrow checker, we can scale our code to use the full potential
+of our CPU without being scared we are programming data races into our code. We
+can fearlessly distribute our work across multiple threads and reap the increased
+performance in our application.
+
+Sleep easy knowing that when a Rust program compiles, it's means that 99% of the
+time, it will work exactly the way you expect and won't wake you up at 1AM.
+
+-->
 
 ---
 
@@ -625,7 +735,7 @@ struct Args {
 }
 ```
 
-![bg contain top:0px right:15%](./assets/memes/smallbrain17.PNG)
+![bg right:20%](./image-4.jpg)
 
 ---
 
@@ -646,13 +756,29 @@ Options:
   -V, --version        Print version
 ```
 
-![bg contain top:0px right:15%](./assets/memes/smallbrain17.PNG)
+![bg right:20%](./image-4.jpg)
+
+
+
+---
+
+## More Rust Macros
+
+Those are the main ones I've used but theres more like:
+
+- Need to work with JSON, XML, YAML, ect? Use the popular [`serde` crate](https://crates.io/crates/serde)
+- Create types from `graphql` queries automatically thanks to [`graphql_client`](https://crates.io/crates/graphql_client)
+- Love the builder pattern? Theres a macro for that! [`derive_builder`](https://crates.io/crates/derive_builder)
+
+![bg right:20%](./image-5.jpg)
 
 ---
 
 ## More Rust Macros
 
 How about validating SQL at compile time?
+.
+.
 **YUP RUST CAN DO THAT** thanks to the [crate `sqlx`](https://docs.rs/sqlx/latest/sqlx/)!
 
 ```rust
@@ -661,28 +787,22 @@ sqlx::query!(r#"SELECT id, description, done FROM todos ORDER BY id"#)
     .await?;
 ```
 
-Those are the main ones I've used but theres more like:
-
-- Need to work with JSON, XML, YAML, ect? Use the popular [`serde` crate](https://crates.io/crates/serde)
-- Create types for `graphql` queries thanks to [`graphql_client`](https://crates.io/crates/graphql_client)
-- Love the builder pattern? Theres a macro for that! [`derive_builder`](https://crates.io/crates/derive_builder)
-
-![bg contain top:0px right:15%](./assets/memes/mcerebralassassi.PNG)
+![bg right:20%](./image-5.jpg)
 
 ---
 
-## MORE MACROS WTF!!! 🤯
+## 🤯 🤯 🤯 MORE MACROS WTF!!! 🤯 🤯 🤯
 
-WAIT YOU WANT TO PROGRAM YOUR NODE AND PYTHON PACKAGES IN RUST TOO!! 🚀 (Respect 😏)
+WAIT YOU WANT TO PROGRAM YOUR **NODE** AND **PYTHON** PACKAGES IN RUST TOO!! 🤝 (*Respect* 😏)
 
-Well let me tell you...**RUST.CAN.DO.THAT.TO** 🧠
+Well let me tell you...**RUST.CAN.DO.THAT.TO** 🧠 🧠 🧠
 
-- Don't like using that startup library called `react` 🤢? Use the [crate `yew`](https://crates.io/crates/yew) instead and program your frontend in Rust 🤩!
-- Need to go fast but you use Javascript 🤦‍♂️? No worries, [use `wasm-pack`](https://rustwasm.github.io/docs/wasm-pack/introduction.html) to deploy Rust code as an npm module 🤯!
-- Need a fast language but your stuck with Python 😭. Gain some _wheels_ ♿️ by developing a native python extension module using [`pyo3`](https://github.com/PyO3/pyo3)
+- Don't like using `react` cause it's slow 🤢? Use the [crate `yew`](https://crates.io/crates/yew) instead and program your frontend in Rust 🤩!
+- Need to go fast 🚀 but you use Javascript 🤦‍♂️? No worries, [use `wasm-pack`](https://rustwasm.github.io/docs/wasm-pack/introduction.html) to deploy Rust code as an npm module 🫢!
+- Using Python 😭? Ditch the _training wheels_ 😎 and go **fast** by using rust to build a native python extension module using [`pyo3`](https://github.com/PyO3/pyo3)
 
 
-![bg contain top:0px right:15%](./assets/memes/expand.png)
+![bg right:20%](./image-3.jpg)
 
 
 ---
@@ -693,70 +813,27 @@ Well let me tell you...**RUST.CAN.DO.THAT.TO** 🧠
 - Zero cost abstractions 👌
 - Iterators 🚅
 - Channels and message passing ✉️
-- Cross platform support
-- `async` / `await`
-- New releases of Rust every 6 weeks
+- Cross platform support 💻
+- `async` / `await` 🚀
+- **New releases of Rust every 6 weeks** 🤯
 - Update language in one command
-- And soooooo much more!
+- Built in package manager
+- AND SO MUCH MORE!
 
-![bg contain top:0px right:15%](./assets/memes/ascended.PNG)
-
----
-
-# Rust tools
+![bg right:33%](./image-6.jpg)
 
 ---
 
-## Cargo
-
-Package manager and build system for Rust.
-
-```
-➜  lib git:(main) ✗ cargo search tokio
-tokio = "1.36.0"                  # An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications. 
-console-subscriber = "0.2.0"      # A `tracing-subscriber::Layer` for collecting Tokio console telemetry. 
-tokio-console = "0.1.10"          # The Tokio console: a debugger for async Rust. 
-pyo3-asyncio = "0.20.0"           # PyO3 utilities for Python's Asyncio library
-pyo3-asyncio-macros = "0.20.0"    # Proc Macro Attributes for PyO3 Asyncio
-mailerlite-rs = "1.0.0"           # MailerLite Rust SDK
-tokio-metrics = "0.3.1"           # Runtime and task level metrics for Tokio applications. 
-tokio-context = "0.1.3"           # Contexts for cancelling asynchronous tasks using tokio
-tokio_with_wasm = "0.4.0"         # Mimicking tokio functionalies on web browsers
-tokio-graceful = "0.1.6"          # util for graceful shutdown of tokio applications
-```
+# Where can i learn more Rust?!?!
 
 ---
 
-## Rustup
-
-Install, manage and update rust toolchains with one command
-
-```
-rustup update
-```
-
----
-
-## Rust Analyzer
-
-Great language and type predication integration inside of any IDE that supports **Language Server Protocol** (LSP)
-
-- Infer types from other variables, function and traits
-- Expand macros in the background
-- Have rust errors by default show in your IDE
-
----
-
-# So you want to try love Rust, now what?
-
----
-
-## Where can I learn more?
+## Where can I learn more? 📖
 
 - [**Rust book**](https://doc.rust-lang.org/): Learn the basics of the language
 - [**Google Comprehensive Rust**](https://google.github.io/comprehensive-rust/): Googles introduction to rust
 - [**Learn Rust with entirely too many linked lists**](https://rust-unofficial.github.io/too-many-lists/): More advanced rust
-- [**Jon Gjengset**](https://www.youtube.com/c/jongjengset): Youtube channel covering advanced projects and material in rust
+- [**Jon Gjengset @jonhoo**](https://www.youtube.com/c/jongjengset): Youtube channel covering advanced rust
 - [**Proc Macro workshop**](https://github.com/dtolnay/proc-macro-workshop): Workshop example on how to make your own rust macros
 - [**Mini-LSM**](https://skyzh.github.io/mini-lsm/): Tutorial on building a Log Structured Merge-tree database
 - So much more, just need to look 🤯
@@ -767,7 +844,7 @@ I understand if this presentation has made you interested in learning why Rust i
 
 ---
 
-## How can I stay in the loop?
+## How can I stay in the loop? 🎧
 
 - [**This week in Rust**](https://this-week-in-rust.org) - Weekly articles about Rust made by the community
 - [**Rustacean Station**](https://rustacean-station.org) - Podcasts on rust the language and it's projects
@@ -777,15 +854,26 @@ Other forms I use is also following maintainers
 
 - [**Niko Matsakis Blog**](https://smallcultfollowing.com/babysteps/) - About the language and it's development
 - [**Yoshua Wuyts**](https://blog.yoshuawuyts.com) - A lot of Discussions about everything Rust
-
-To get more involved, I would recommend subscribing to this week in rust. They have a section on contributing to open source projects that need help.
+- [**Faster than lime**](https://fasterthanli.me/) - Discussion on Rust and general programming
 
 ---
 
-## More "Consider Rust" Presentations
+## More "Consider Rust" Presentations 🙇‍♂️
 
 - [Considering Rust](https://www.youtube.com/watch?v=DnT-LUQgc7s) by Jon Gjengset
 - [Unlocking Rust's power through mentorship and knowledge spreading, with Tim McNamara](https://open.spotify.com/episode/32rkz55Jm4MRsO1AEmH9UT?si=b1e1791c40ff47be) who lead Rust education across Amazon
+
+---
+
+## Call to Action
+
+- Talk to your co-workers about this presentation if they didn't attend!
+- If you have some time, reading the [**Rust book**](https://doc.rust-lang.org/)
+- If you like watching videos look into [**Jon Gjengset Youtube channel**](https://www.youtube.com/c/jongjengset)
+- Subscribe to the [**This week in Rust**](https://this-week-in-rust.org) new letter
+- If you learn better by doing, try and contribute to `Innersource-commons/rbc-security-rust`
+
+### Just go use the language and understand why it's so loved
 
 ---
 

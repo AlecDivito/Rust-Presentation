@@ -38,6 +38,12 @@ fn main() {
         println!("Hello {}!", args.name)
     }
 
+    struct StringSlice<'a>(&'a str); // Must be explicit that we borrow a string for 'a
+
+    let message = "Hello, world";
+    let slice = StringSlice(&message[7..]); // Borrow the slice
+    print!("{}", slice.0); // Prints "world"
+
     let mut list = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let _slice = Slice {
         _slice: &mut list[0..5],

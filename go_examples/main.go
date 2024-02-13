@@ -6,6 +6,10 @@ import (
 )
 
 func main() {
+	var pointer *int
+	number := *pointer
+	print(number)
+
 	var counter = 0
 	var wg sync.WaitGroup
 	for i := 0; i < 1000; i++ {
